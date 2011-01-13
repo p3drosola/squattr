@@ -71,3 +71,11 @@ footer a {
 	color: #00b9f6;
 	text-shadow: 0px 1px 1px white;
 }
+
+#preload {
+	position: absolute;
+	bottom: 0px;
+	right: 0px;
+	opacity: 0;
+	display: none;
+}

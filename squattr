@@ -58,7 +58,7 @@ begin
   lines = 1
   file = File.new( names_list , "r")
   while ( line = file.gets )
-
+    line = line.strip
     puts "#{lines}: #{line}"
     list << process( search( line), line)
     lines += 1

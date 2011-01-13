@@ -1,0 +1,83 @@
+#!/usr/bin/env ruby
+
+require 'rubygems'
+require 'json'
+require 'net/http'
+require 'erubis'
+
+names_list = ARGV[0]
+
+t = Time.new
+display_time = t.strftime("%d of %B, %Y")
+
+
+def search( query )
+  
+  space_replace = ''
+  
+  domain = query.gsub(/[^[:alnum:]\s]/, '')
+  domain = domain.gsub(' ', space_replace ).downcase
+  
+  puts "search: #{domain}"
+  
+  url = "http://domai.nr/api/json/search?q=#{domain}"
+  resp = Net::HTTP.get_response( URI.parse(url) )
+  
+  data = JSON.parse( resp.body ) 
+  
+  if data.has_key? 'Error'
+    raise "Domai.nr service error"
+  end
+  return data
+end
+
+
+def process( result_object, name )
+
+  ret = Hash.new
+  ret['name'] = name
+  ret['query'] = result_object['query']
+  ret['hits'] = Array.new
+  
+  result_object['results'].each do |item|
+    if item['availability'] == 'available'
+      ret['hits'] <<  item['domain']
+    end
+  end
+  
+  return ret
+  
+end
+
+
+list = Array.new
+
+# read file & process entries
+begin
+
+  lines = 1
+  file = File.new( names_list , "r")
+  while ( line = file.gets )
+
+    puts "#{lines}: #{line}"
+    list << process( search( line), line)
+    lines += 1
+  end
+  file.close
+  
+  template = File.read("lib/template.rhtml")
+  template = Erubis::Eruby.new( template )
+  document = template.result( binding() )
+  File.open("reports/#{names_list}.html", 'w') {|f| f.write(document) }
+  
+rescue => err
+  puts "Exception: #{err}"
+  err
+  exit
+end
+
+
+
+
+
+

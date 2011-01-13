@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>Squattr Report for <%= names_list %></title>
+
+<link rel="stylesheet" href="http://www.blueprintcss.org/blueprint/screen.css" type="text/css" />
+<link rel="stylesheet" href="../lib/reports.css" type="text/css" />
+
+</head>
+<body>
+	
+<section id="wrap">
+	
+	<h1><%= names_list %></h1>
+	<span id="report-time"><%= display_time %></span>
+	
+	<section id="list">
+	
+		<% list.each do |domain| %>
+			<h3><%= domain['name'] %></h3>
+			<h6><%= domain['query'] %></h6>
+			<ul>
+			<% domain['hits'].each do |hit| %>
+				<li><%= hit %></li>
+			<% end %>
+			</ul>	
+		<% end %>	
+	
+	</section>
+</section>
+
+<footer><a href="https://github.com/p3drosola/squattr">Squattr</a> - by p3drosola</footer>
+
+</body>
+</html>

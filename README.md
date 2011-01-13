@@ -6,6 +6,12 @@ Squattr uses wordlists to check domain availability.
 *   Word variations & domain name hacks. (eg: grou.ps)
 *   Generates sexy html reports.
 
+Usage
+-----
+
+./squattr wordlist.txt
+
+
 Credits
 -------
 

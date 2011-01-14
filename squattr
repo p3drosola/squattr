@@ -69,6 +69,7 @@ begin
   template = Erubis::Eruby.new( template )
   document = template.result( binding() )
   File.open("reports/#{names_list}.html", 'w') {|f| f.write(document) }
+  puts "All done! Read your report at 'reports/#{names_list}.html'"
   
 rescue => err
   puts "Exception: #{err}"

@@ -1,4 +1,3 @@
-ToDO
+Todo
 ----
-
-+ open generated report in default app (UNIX = open & WIN = start)
++ err, not much

@@ -1,7 +1,7 @@
 What does Squattr do?
 ---------------------
 
-Squattr uses wordlists to check domain availability.
+Squattr uses wordlists to check domain name availability.
 
 *   Word variations & domain name hacks. (eg: grou.ps)
 *   Generates sexy html reports.

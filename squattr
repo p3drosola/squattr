@@ -4,12 +4,13 @@ require 'rubygems'
 require 'json'
 require 'net/http'
 require 'erubis'
+require 'rbconfig'
 
-names_list = ARGV[0]
+names_list = ARGV[0].to_s
 
 t = Time.new
 display_time = t.strftime("%d of %B, %Y")
-
+on_windows = RbConfig::CONFIG['host_os'] =~ /mswin|mingw/
 
 def search( query )
   
@@ -69,8 +70,13 @@ begin
   template = Erubis::Eruby.new( template )
   document = template.result( binding() )
   File.open("reports/#{names_list}.html", 'w') {|f| f.write(document) }
-  puts "All done! Read your report at 'reports/#{names_list}.html'"
-  
+  puts "\n\nAll done! Read your report at 'reports/#{names_list}.html'"
+	if !on_windows
+		system("open 'reports/#{names_list}.html'")
+	else
+		# this is untested, since I'm not windows
+		system("start 'reports\\#{names_list}.html'")
+  end
 rescue => err
   puts "Exception: #{err}"
   err

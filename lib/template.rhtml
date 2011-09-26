@@ -7,9 +7,6 @@
 <link rel="stylesheet" href="../lib/blueprint.css" type="text/css" />
 <link rel="stylesheet" href="../lib/reports.css" type="text/css" />
 
-<script src="../lib/jquery.min.js" type="text/javascript" charset="utf-8" async defer></script>
-<script src="../lib/interface.js" type="text/javascript" charset="utf-8" async defer></script>
-
 </head>
 <body>
 	
@@ -21,19 +18,25 @@
 	<section id="list">
 	
 		<% list.each do |domain| %>
+			<% if !domain['hits'].empty? %>
+		
 			<h3><%= domain['name'] %></h3>
 			<h6><%= domain['query'] %></h6>
 			<ul>
 			<% domain['hits'].each do |hit| %>
-				<li><%= hit %></li>
+				<li><a href="http://domai.nr/api/register?domain=<%= hit %>">
+				<%= hit %>
+				</a></li>
 			<% end %>
-			</ul>	
+			</ul>
+			
+			<% end %>
 		<% end %>	
 	
 	</section>
 </section>
 
-<footer><a href="https://github.com/p3drosola/squattr">Squattr</a> - by p3drosola</footer>
+<footer><a href="https://github.com/p3drosola/squattr">Squattr</a> - by <a href="http://twitter.com/p3drosola">@p3drosola</a></footer>
 
 </body>
 </html>

@@ -50,26 +50,42 @@ h6 {
 	
 }
 
+/* @group List */
+
 #list li {
+	color: #000;
 	padding: 2px 0;
 	cursor: default;
 }
 #list li:hover {
-	background: #f4feff url('eye.png') no-repeat right center;
-	color: #000;
+	color: #00b9f6;
 	text-shadow: 0px 1px 1px white;
 	
 }
 
+#list li a {
+	color: #000;
+	text-decoration: none;
+}
+#list li a:hover {
+	color: #434343;
+	border-bottom: 1px dashed #daedfd;
+}
+
+/* @end */
+
 footer {
+	color: #464646;
 	text-align: center;
-	padding: 0 0 20px 0;
+	padding: 20px;
+	text-shadow: 0px 1px 1px white;
+
 }
 
 footer a {
+	color: #464646;
 	text-decoration: none;
-	color: #00b9f6;
-	text-shadow: 0px 1px 1px white;
+	
 }
 
 #preload {
